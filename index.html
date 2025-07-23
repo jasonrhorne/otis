@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -85,13 +85,30 @@
             </section>
         </main>
 
-        <footer>
-            <p>© 2025 Jason Horne. All rights reserved.</p>
-        </footer>
+        <footer class="site-footer">
+  <span>© 2025 Jason Horne. All rights reserved.</span>
+  <a href="#" id="darkModeToggle" class="toggle-link">Toggle Dark Mode</a>
+</footer>
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
+    </script>
+    <script>
+      const toggle = document.getElementById('darkModeToggle');
+      function updateToggleText() {
+        const theme = document.documentElement.getAttribute('data-theme');
+        toggle.textContent = theme === 'dark' ? 'Toggle to Light Mode' : 'Toggle to Dark Mode';
+      }
+      toggle.onclick = function(e) {
+        e.preventDefault();
+        const theme = document.documentElement.getAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
+        updateToggleText();
+      };
+      // Optional: Start in dark mode
+      document.documentElement.setAttribute('data-theme', 'dark');
+      updateToggleText();
     </script>
 </body>
 </html>
