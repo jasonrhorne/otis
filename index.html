@@ -95,20 +95,33 @@
         AOS.init();
     </script>
     <script>
-      const toggle = document.getElementById('darkModeToggle');
-      function updateToggleText() {
-        const theme = document.documentElement.getAttribute('data-theme');
-        toggle.textContent = theme === 'dark' ? 'Toggle to Light Mode' : 'Toggle to Dark Mode';
-      }
-      toggle.onclick = function(e) {
-        e.preventDefault();
-        const theme = document.documentElement.getAttribute('data-theme');
-        document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
-        updateToggleText();
-      };
-      // Optional: Start in dark mode
-      document.documentElement.setAttribute('data-theme', 'dark');
-      updateToggleText();
-    </script>
+  const toggle = document.getElementById('darkModeToggle');
+  function updateToggleText() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    toggle.textContent = theme === 'dark' ? 'Toggle to Light Mode' : 'Toggle to Dark Mode';
+  }
+
+  // Detect system preference
+  function getPreferredTheme() {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light';
+    } else {
+      return 'light'; // fallback if no preference
+    }
+  }
+
+  toggle.onclick = function(e) {
+    e.preventDefault();
+    const theme = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
+    updateToggleText();
+  };
+
+  // Set initial theme based on system preference
+  document.documentElement.setAttribute('data-theme', getPreferredTheme());
+  updateToggleText();
+</script>
 </body>
 </html>
